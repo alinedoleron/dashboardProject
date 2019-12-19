@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import AverageIssueCloseTime from './components/AverageIssueCloseTime';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const token = 'c455c3ed3a4a31eca7b19d562dd3285bea7e56bf';
+
+
+//Apollo client setup
+const client = new ApolloClient({
+  uri: 'https://api.github.com/graphql',
+  headers: {
+      authorization: 'Bearer '+ token
+  }
+});
+
+class App extends Component {
+  render() {
+    return (
+      <ApolloProvider client={client}>
+          <AverageIssueCloseTime/>
+      </ApolloProvider>
+    );
+  }
 }
 
 export default App;
