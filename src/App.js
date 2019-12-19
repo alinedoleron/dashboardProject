@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import AverageIssueCloseTime from './components/AverageIssueCloseTime';
+import AveragePRsCloseTime from './components/AveragePRsCloseTime';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
-
-const token = 'c455c3ed3a4a31eca7b19d562dd3285bea7e56bf';
+const token = '7c12dc376fc6d7404baecd5ab900ac3869cd315e';
 
 
 //Apollo client setup
@@ -17,9 +17,11 @@ const client = new ApolloClient({
 });
 
 class App extends Component {
+
   render() {
     return (
       <ApolloProvider client={client}>
+          <AveragePRsCloseTime/>
           <AverageIssueCloseTime/>
       </ApolloProvider>
     );
