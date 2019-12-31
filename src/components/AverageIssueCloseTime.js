@@ -2,6 +2,7 @@ import  React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import {getAverageTime} from '../utils/AverageTime';
 import {getIssuesClosed} from '../queries/queries';
+import Card from './Card';
 
 const AverageIssueCloseTime = () => {
         const { loading, error, data } = useQuery(getIssuesClosed);
@@ -9,27 +10,19 @@ const AverageIssueCloseTime = () => {
         let averageIssueCloseTime = '';
 
         if (loading) {
-            return (
-                <div>
-                    Loading...
-                </div>
-            )
+            averageIssueCloseTime = 'Loading...';
         } else if (error) {
-            return (
-                <div>
-                    ERROR!
-                </div>
-            )
-        } else if (data) {
+            averageIssueCloseTime = 'Error!';
+        }else if (data) {
             averageIssueCloseTime = getAverageTime(data.repository.issues.nodes);
 
-            return (
-                <div>
-                    {averageIssueCloseTime}
-                </div>
-            )
-
         }
+
+        return (
+            <div className='small-cards'>
+                <Card content = {averageIssueCloseTime}/>
+            </div>
+        )
 
 }
 
