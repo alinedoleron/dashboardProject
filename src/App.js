@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import AverageIssueCloseTime from './components/AverageIssueCloseTime';
-import AveragePRsCloseTime from './components/AveragePRsCloseTime';
+import AveragePRsCloseTime from './components/AveragePRsMergeTime';
+import AveragePRsMergedBySize from './components/AveragePRsMergedBySize';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
-const token = '7c12dc376fc6d7404baecd5ab900ac3869cd315e';
+const token = 'e58bd9e0535b7adc2f99e6800ede50676eff1e36';
 
 
 //Apollo client setup
@@ -21,8 +22,14 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-          <AveragePRsCloseTime/>
-          <AverageIssueCloseTime/>
+        <div className='container'>
+          <div className='time-cards'>
+            <AveragePRsCloseTime/>
+            <AverageIssueCloseTime/>
+          </div>
+          <AveragePRsMergedBySize/>
+        </div>
+
       </ApolloProvider>
     );
   }
