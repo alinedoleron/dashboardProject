@@ -2,7 +2,7 @@ import { gql } from 'apollo-boost';
 
 const getIssuesClosed = gql `
 query {
-    repository(owner: "zenorocha", name: "clipboard.js") {
+    repository(owner: "diegonvs", name: "gatsby-boilerplate") {
         issues(last:100, states: CLOSED) {
             nodes {
             id
@@ -16,17 +16,19 @@ query {
     }
 `;
 
-const getPRsClosed = gql `
+const getPRsMerged = gql `
 query {
-        repository(owner: "zenorocha", name: "clipboard.js") {
+        repository(owner: "diegonvs", name: "gatsby-boilerplate") {
             pullRequests(last: 100, states: MERGED) {
                 nodes {
                 closedAt
                 createdAt
+                deletions
+                additions
                 }
             }
         }
     }
 `;
 
-export {getIssuesClosed, getPRsClosed};
+export {getIssuesClosed, getPRsMerged};
