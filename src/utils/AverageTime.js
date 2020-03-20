@@ -33,4 +33,20 @@ const getAverageTime = (nodes) => {
 
 }
 
-export {getAverageTime};
+const getAverageTimeInHours = (nodes) => {
+    let totalDays = 0;
+
+    nodes.map((node) =>
+            {
+                let created = new Date(node.createdAt);
+                let closed = new Date(node.closedAt);
+                totalDays += getDays(closed - created);
+            }
+            );
+
+            let totalNodes = nodes.length;
+
+            return (getHours(totalDays) + getHours(totalDays - Math.floor(totalDays)))/totalNodes;
+}
+
+export {getAverageTime, getAverageTimeInHours};
