@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 import AverageIssueCloseTime from './components/AverageIssueCloseTime';
+import RepositoryData from './components/RepositoryData';
 import AveragePRsCloseTime from './components/AveragePRsMergeTime';
 import AveragePRsMergedBySize from './components/AveragePRsMergedBySize';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
-const token = 'e58bd9e0535b7adc2f99e6800ede50676eff1e36';
+// const token = '5ad31f35b8fff49893d6fbf2e3fcc4ee8d687226';
 
 
 //Apollo client setup
@@ -17,22 +17,32 @@ const client = new ApolloClient({
   }
 });
 
-class App extends Component {
 
-  render() {
+const App = () => {
+
+  const [repoState, setRepoState] = useState({});
+
+  useEffect(()=>{
+    setRepoState({
+      ...repoState
+    })
+  },[])
+
     return (
       <ApolloProvider client={client}>
         <div className='container'>
-          <div className='time-cards'>
-            <AveragePRsCloseTime/>
-            <AverageIssueCloseTime/>
+          <div className='header'>
+            <RepositoryData repoState={repoState} setRepoState={setRepoState}/>
           </div>
-          <AveragePRsMergedBySize/>
+          <AveragePRsMergedBySize repoState={repoState}/>
+          <div className='time-cards'>
+            <AveragePRsCloseTime repoState={repoState}/>
+            <AverageIssueCloseTime repoState={repoState}/>
+          </div>
         </div>
 
       </ApolloProvider>
     );
-  }
 }
 
 export default App;
