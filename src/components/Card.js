@@ -1,11 +1,11 @@
 import  React from 'react';
 
-const Card = ({content}) => {
+const Card = ({content, cardName}) => {
 
     return (
         <div className="card card-type-asset user-card">
             <div className="aspect-ratio card-info card-item-first">
-                    Average Issue Close Time
+                    {cardName}
             </div>
             <div className="card-body">
                 <div className="card-row">
