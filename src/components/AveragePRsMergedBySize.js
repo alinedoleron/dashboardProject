@@ -3,10 +3,16 @@ import { useQuery } from '@apollo/react-hooks';
 import {getAverageTime} from '../utils/AverageTime';
 import {getPRsMerged} from '../queries/queries';
 
-
-
-const AveragePRsMergedBySize = () => {
-    const { loading, error, data } = useQuery(getPRsMerged);
+const AveragePRsMergedBySize = ({repoState}) => {
+    console.log('inputs no average => ', repoState);
+    const { data } = useQuery(getPRsMerged,
+        {
+            variables:
+                {
+                    user: repoState.user,
+                    repository: repoState.repository
+                }
+            });
     let smallPRs = [];
     let mediumPRs = [];
     let largePRs = [];

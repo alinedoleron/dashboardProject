@@ -4,8 +4,17 @@ import {getAverageTime} from '../utils/AverageTime';
 import {getPRsMerged} from '../queries/queries';
 import Card from './Card';
 
-const AveragePRsMergeTime = () => {
-        const { loading, error, data } = useQuery(getPRsMerged);
+const AveragePRsMergeTime = ({repoState}) => {
+        const { loading, error, data } = useQuery(getPRsMerged,
+            {
+                variables:
+                    {
+                        user: repoState.user,
+                        repository: repoState.repository
+                    }
+                });
+
+        const name= 'Average Pull Request Merge Time';
 
         let averagePRsMergedTime = '';
 
@@ -19,7 +28,7 @@ const AveragePRsMergeTime = () => {
 
         return (
             <div className='small-cards'>
-                <Card content={averagePRsMergedTime}/>
+                <Card content={averagePRsMergedTime} cardName={name}/>
             </div>
         )
 
